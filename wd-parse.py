@@ -38,9 +38,11 @@ import sys
 def usage():
 	print("WD-Clientraw-Parse v1.0 By Marcus Povey <marcus@marcus-povey.co.uk>");
 	print
-	print("Usage: python wd-parse.py -u http://www.example.com/path/to/clientraw.txt [-k list,of,options]")
-	print 
-	print("Where options are keys to return, or all if none given:")
+	print("Usage: python wd-parse.py -u http://www.example.com/path/to/clientraw.txt [-o \"formatted list of output\"]")
+	print
+	print("Format string similar to 'Wind speed: {{option}}, Temperature: {{option}}'")
+	print
+	print("Where 'option' is one of the keys to return:")
 	print("1	Wind: Speed - Average - Current	(Knots)")
 	print("2	Wind: Speed - Current	(Knots)")
 	print("3	Wind: Dir - Current		(Compass heading)")
@@ -72,7 +74,7 @@ def usage():
 	print("29	Date/Time: Time - Hour	(Time - 24hr clock)")
 	print("30	Date/Time: Time - Minute 	(Time - 24hr clock)")
 	print("31	Date/Time: Time - Seconds	(Time - 24hr clock)")
-	print("32	Forecast: Station Name	(Label)")
+	print("32	Station Name	(Label)")
 	print("33	Lightning: Strikes - in Total	(Number)")
 	print("34	Solar: Current reading (0% - 100%)	(Number)")
 	print("35	Date/Time: Date - Day	(Time)")
@@ -211,7 +213,7 @@ def usage():
 def main():
 	
 	url = None
-	keys = None
+	format = "{{32}} at {{29}}:{{30}}.{{31}}, {{35}}/{{36}}/{{141}}: Wind: {{3}} deg at {{2}} knots (gusts: {{133}} knots), Pressure: {{6}} hPa"
 
 	try:
 		opts, args = getopt.getopt(sys.argv[1:], "u:k:h", ["help"])
@@ -226,16 +228,27 @@ def main():
 		elif o in ("-h", "--help"):
 			usage()
 			sys.exit()
-		elif o == "-k":
-			keys = a.split(',');
+		elif o == "-o":
+			format = a
 		else:
 			usage()
 			sys.exit()
+			
+	if url == None or format == None:
+		usage()
+		sys.exit()
 
 	response = urllib.urlopen(url)
 	data = response.read()
 	
-	print(data)
-
+	bits = data.split(' ')
+	n = 0;
+	for item in bits:
+		trim = item.strip()
+		format = format.replace('{{' + str(n) + '}}', trim)
+		n = n+1
+		
+	print format
+	
 if __name__ == "__main__":
     main()
