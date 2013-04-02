@@ -48,7 +48,7 @@ def main(argv):
 	if len(argv) > 1 and argv[1] == 'config':
 		print 'graph_args --base 1000 -l 0' 
 		print 'graph_scale no'
-		print 'graph_title Weather Display Winds'
+		print 'graph_title Weather Display Winds for ' + command[1]
 		print 'graph_vlabel Windspeed Kts'
 		print 'graph_category weather'
 		print 'current.label Current speed'

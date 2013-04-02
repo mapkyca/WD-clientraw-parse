@@ -48,7 +48,7 @@ def main(argv):
 	if len(argv) > 1 and argv[1] == 'config':
 		print 'graph_args --base 1000 -l 0' 
 		print 'graph_scale no'
-		print 'graph_title Weather Display Pressure'
+		print 'graph_title Weather Display Pressure for ' + command[1]
 		print 'graph_vlabel Pressure hPa'
                 print 'graph_category weather'
 		print 'current.label Pressure'
