@@ -216,7 +216,7 @@ def main():
 	format = "{{32}} at {{29}}:{{30}}.{{31}}, {{35}}/{{36}}/{{141}}: Wind: {{3}} deg at {{2}} knots (gusts: {{133}} knots), Pressure: {{6}} hPa"
 
 	try:
-		opts, args = getopt.getopt(sys.argv[1:], "u:k:h", ["help"])
+		opts, args = getopt.getopt(sys.argv[1:], "u:o:h", ["help"])
 	except getopt.GetoptError, err:
 		print str(err)
 		usage()
