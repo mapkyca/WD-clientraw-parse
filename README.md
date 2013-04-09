@@ -186,4 +186,4 @@ See
 
  * Marcus Povey <http://www.marcus-povey.co.uk>
  * Weather Display <http://www.weather-display.com/index.php>
-	 
+ * Blog post <http://www.marcus-povey.co.uk/2013/04/09/parsing-weather-display-weather-station-output/>
